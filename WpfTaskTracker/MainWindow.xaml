@@ -10,7 +10,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Label>TaskTracker</Label>
@@ -23,7 +27,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <Label>Category: </Label>
-                <ComboBox Grid.Column="0" Height="Auto">
+                <ComboBox Grid.Column="0" Height="Auto" Width="100">
                     <ComboBoxItem IsSelected="True">All</ComboBoxItem>
                     <ComboBoxItem>Category 1</ComboBoxItem>
                     <ComboBoxItem>Category 2</ComboBoxItem>
@@ -34,7 +38,7 @@
 
         <StackPanel Grid.Row="3">
             <Label>Tasks: </Label>
-            <TreeView Margin="10,10,0,13" Name="TreeView1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="200">
+            <TreeView Margin="10,10,10,13" Name="TreeView1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="200">
                 <TreeViewItem Header="Task1">
                     <TreeViewItem Name="Child1">
                         <TreeViewItem.Header>
@@ -67,5 +71,17 @@
                 </TreeViewItem>
             </TreeView>
         </StackPanel>
+
+        <Grid Grid.Row="4">
+            <CheckBox Name="DifficultyCheckbox" Margin="10,5,10,5">Use difficulty level</CheckBox>
+        </Grid>
+
+        <Grid Grid.Row="5">
+            
+        </Grid>
+
+        <Grid Grid.Row="6">
+            <Button Height="20" Width="100" HorizontalAlignment="Right" Margin="0,5,10,10" Click="Button_Click">Add new task</Button>
+        </Grid>
     </Grid>
 </Window>

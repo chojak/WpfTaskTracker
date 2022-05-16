@@ -1,0 +1,79 @@
+﻿<Window x:Class="WpfTaskTracker.AddTaskWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTaskTracker"
+        mc:Ignorable="d"
+        Title="AddTaskWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <DockPanel>
+                <Label>Name</Label>
+                <TextBox Name="TaskNameInput" Margin="16,5,10,5"></TextBox>
+            </DockPanel>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <StackPanel>
+                <DockPanel>
+                    <Label>Category</Label>
+                    <ComboBox HorizontalAlignment="Left" Width="200">
+                        <ComboBoxItem>Category 1</ComboBoxItem>
+                        <ComboBoxItem>Category 2</ComboBoxItem>
+                        <ComboBoxItem>Category 3</ComboBoxItem>
+                    </ComboBox>
+                </DockPanel>
+                <CheckBox Name="NewCategoryCheckBox" Margin="60,5">Add new category</CheckBox>
+                <TextBox Name="NewCategoryNameTextBox" Margin="60,5,10,5"></TextBox>
+            </StackPanel>
+            
+        </Grid>
+        
+        <Grid Grid.Row="3">
+            <DockPanel Margin="10,5,10,0">
+                <Label Margin="45,0,10,0" >Difficulty level</Label>
+                <TextBox Text="{Binding ElementName=DifficultySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" Margin="5,5,0,5"/>
+                <Slider Name="DifficultySlider" Maximum="6" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Margin="5"/>
+            </DockPanel>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <DockPanel>
+                <CheckBox Margin="10">Set start date</CheckBox>
+                <DatePicker Margin="5,5,10,5"></DatePicker>
+            </DockPanel>
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <DockPanel>
+                <CheckBox Margin="10">Set end date</CheckBox>
+                <DatePicker Margin="8,5,10,5"></DatePicker>
+            </DockPanel>
+        </Grid>
+
+        <Grid Grid.Row="6">
+            <StackPanel>
+                <CheckBox Margin="10,5,10,5">Add sub tasks</CheckBox>
+                <TextBox Height="100" Margin="10,0"></TextBox>
+                <Button HorizontalAlignment="Right" Margin="10,5">Add new subtask</Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="7">
+            <Button HorizontalAlignment="Right" Margin="10">Add task</Button>
+        </Grid>
+    </Grid>
+</Window>
