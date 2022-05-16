@@ -1,0 +1,71 @@
+﻿<Window x:Class="WpfTaskTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfTaskTracker"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label>TaskTracker</Label>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <Label>Category: </Label>
+                <ComboBox Grid.Column="0" Height="Auto">
+                    <ComboBoxItem IsSelected="True">All</ComboBoxItem>
+                    <ComboBoxItem>Category 1</ComboBoxItem>
+                    <ComboBoxItem>Category 2</ComboBoxItem>
+                    <ComboBoxItem>Category 3</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="3">
+            <Label>Tasks: </Label>
+            <TreeView Margin="10,10,0,13" Name="TreeView1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="200">
+                <TreeViewItem Header="Task1">
+                    <TreeViewItem Name="Child1">
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="SubTask1"></TextBlock>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem Name="Child2">
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="SubTask2"></TextBlock>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem Name="Child3">
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="SubTask3"></TextBlock>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem Name="Child4">
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="SubTask4"></TextBlock>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </TreeViewItem>
+            </TreeView>
+        </StackPanel>
+    </Grid>
+</Window>
