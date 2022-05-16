@@ -32,9 +32,13 @@
             </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Row="3">
-            <Label>Tasks: </Label>
-            <TreeView Margin="10,10,0,13" Name="TreeView1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="200">
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label >Tasks: </Label>
+            <TreeView Grid.Row="1" Name="TreeView1">
                 <TreeViewItem Header="Task1">
                     <TreeViewItem Name="Child1">
                         <TreeViewItem.Header>
@@ -66,6 +70,6 @@
                     </TreeViewItem>
                 </TreeViewItem>
             </TreeView>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Window>
