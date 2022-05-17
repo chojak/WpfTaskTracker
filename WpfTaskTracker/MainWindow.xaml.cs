@@ -25,12 +25,7 @@ namespace WpfTaskTracker
             InitializeComponent();
         }
 
-        private void ComboBoxItem_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddTask_Click(object sender, RoutedEventArgs e)
         {
             AddTaskWindow win2 = new AddTaskWindow();
             win2.Show();

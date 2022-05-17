@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfTaskTracker"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+   
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -26,8 +27,8 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal">
-                <Label>Category: </Label>
-                <ComboBox Grid.Column="0" Height="Auto" Width="100">
+                <Label>Category:</Label>
+                <ComboBox x:Name="CategoryComboBox" Grid.Column="0" Height="Auto" Width="100">
                     <ComboBoxItem IsSelected="True">All</ComboBoxItem>
                     <ComboBoxItem>Category 1</ComboBoxItem>
                     <ComboBoxItem>Category 2</ComboBoxItem>
@@ -36,52 +37,110 @@
             </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Row="3">
-            <Label>Tasks: </Label>
-            <TreeView Margin="10,10,10,13" Name="TreeView1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="200">
-                <TreeViewItem Header="Task1">
-                    <TreeViewItem Name="Child1">
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0">Tasks:</Label>
+
+            <TreeView Margin="10,10,10,13" x:Name="TasksTreeView" Grid.Row="1">
+                <TreeViewItem x:Name="Task1">
+                    <TreeViewItem.Header>
+                        <CheckBox>Task1</CheckBox>
+                    </TreeViewItem.Header>
+
+                    <TreeViewItem x:Name="Task1Child1">
                         <TreeViewItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="SubTask1"></TextBlock>
-                            </StackPanel>
+                            <CheckBox>SubTask1</CheckBox>
                         </TreeViewItem.Header>
                     </TreeViewItem>
-                    <TreeViewItem Name="Child2">
+                    <TreeViewItem x:Name="Task1Child2">
                         <TreeViewItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="SubTask2"></TextBlock>
-                            </StackPanel>
+                            <CheckBox>SubTask2</CheckBox>
                         </TreeViewItem.Header>
                     </TreeViewItem>
-                    <TreeViewItem Name="Child3">
+                    <TreeViewItem x:Name="Task1Child3">
                         <TreeViewItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="SubTask3"></TextBlock>
-                            </StackPanel>
+                            <CheckBox>SubTask3</CheckBox>
                         </TreeViewItem.Header>
                     </TreeViewItem>
-                    <TreeViewItem Name="Child4">
+                    <TreeViewItem x:Name="Task1Child4">
                         <TreeViewItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="SubTask4"></TextBlock>
-                            </StackPanel>
+                            <CheckBox>SubTask4</CheckBox>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </TreeViewItem>
+
+                <TreeViewItem x:Name="Task2">
+                    <TreeViewItem.Header>
+                        <CheckBox>Task2</CheckBox>
+                    </TreeViewItem.Header>
+
+                    <TreeViewItem Name="Task2Child1">
+                        <TreeViewItem.Header>
+                            <CheckBox>SubTask1</CheckBox>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem x:Name="Task2Child2">
+                        <TreeViewItem.Header>
+                            <CheckBox>SubTask2</CheckBox>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem x:Name="Task2Child3">
+                        <TreeViewItem.Header>
+                            <CheckBox>SubTask3</CheckBox>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem Name="Task2Child4">
+                        <TreeViewItem.Header>
+                            <CheckBox>SubTask4</CheckBox>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </TreeViewItem>
+
+                <TreeViewItem x:Name="Task3">
+                    <TreeViewItem.Header>
+                        <CheckBox>Task3</CheckBox>
+                    </TreeViewItem.Header>
+
+                    <TreeViewItem x:Name="Task3Child1">
+                        <TreeViewItem.Header>
+                            <CheckBox>SubTask1</CheckBox>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem x:Name="Task3Child2">
+                        <TreeViewItem.Header>
+                            <CheckBox>SubTask2</CheckBox>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem x:Name="Task3Child3">
+                        <TreeViewItem.Header>
+                            <CheckBox>SubTask3</CheckBox>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                    <TreeViewItem x:Name="Task3Child4">
+                        <TreeViewItem.Header>
+                            <CheckBox>SubTask4</CheckBox>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                 </TreeViewItem>
             </TreeView>
-        </StackPanel>
+        </Grid>
 
         <Grid Grid.Row="4">
-            <CheckBox Name="DifficultyCheckbox" Margin="10,5,10,5">Use difficulty level</CheckBox>
+            <CheckBox Name="DifficultyCheckBox" Margin="10,5,10,5">Use difficulty level</CheckBox>
         </Grid>
 
-        <Grid Grid.Row="5">
-            
-        </Grid>
+        <DockPanel Grid.Row="5" Margin="10,5,10,5" IsEnabled="{Binding ElementName=DifficultyCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}">
+            <TextBlock>Difficulty:</TextBlock>
+            <TextBox Text="{Binding ElementName=DifficultySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0"></TextBox>
+            <Slider x:Name="DifficultySlider" Minimum="1" Maximum="6" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight"></Slider>
+        </DockPanel>
 
         <Grid Grid.Row="6">
-            <Button Height="20" Width="100" HorizontalAlignment="Right" Margin="0,5,10,10" Click="Button_Click">Add new task</Button>
+            <Button x:Name="AddTaskButton" Height="20" Width="100" HorizontalAlignment="Right" Margin="0,5,10,10" Click="AddTask_Click">Add new task</Button>
         </Grid>
     </Grid>
 </Window>
