@@ -1,11 +1,11 @@
-﻿<Window x:Class="WpfTaskTracker.AddTaskWindow"
+﻿<Window x:Class="WpfTaskTracker.EditTaskWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTaskTracker"
         mc:Ignorable="d"
-        Title="AddTaskWindow" Height="450" Width="800">
+        Title="Edit task" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -85,7 +85,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+
             <CheckBox Margin="10,5,10,5" Name="SubTaskCheckBox">Add sub tasks</CheckBox>
             <Grid Grid.Row="1" IsEnabled="{Binding ElementName=SubTaskCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}">
                 <Grid.RowDefinitions>
@@ -98,7 +98,13 @@
                 <Button HorizontalAlignment="Right" Margin="10,5" Grid.Row="1" Padding="10,3,10,3" Click="AddSubTask_Click">Add new subtask</Button>
             </Grid>
         </Grid>
-
-        <Button Grid.Row="6" HorizontalAlignment="Right" Margin="10" Padding="10,3,10,3" Click="SaveTask_Click">Save task</Button>
+        <Grid HorizontalAlignment="Right" Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" HorizontalAlignment="Right" Margin="10" Padding="10,3,10,3" Click="SaveTask_Click">Save task</Button>
+            <Button HorizontalAlignment="Right" Margin="10" Padding="10,3,10,3" Click="DeleteTask_Click">Delete task</Button>
+        </Grid>
     </Grid>
 </Window>

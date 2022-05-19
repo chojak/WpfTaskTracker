@@ -10,31 +10,34 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace WpfTaskTracker
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logika interakcji dla klasy EditTaskWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EditTaskWindow : Window
     {
-        public MainWindow()
+        public EditTaskWindow()
         {
             InitializeComponent();
         }
 
-        private void AddTask_Click(object sender, RoutedEventArgs e)
+        private void AddSubTask_Click(object sender, RoutedEventArgs e)
         {
-            AddTaskWindow win2 = new AddTaskWindow();
-            win2.Show();
+            AddSubTaskWindow win = new AddSubTaskWindow();
+            win.Show();
         }
 
-        private void EditTask_Click(object sender, RoutedEventArgs e)
+        private void SaveTask_Click(object sender, RoutedEventArgs e)
         {
-            EditTaskWindow win = new EditTaskWindow();
-            win.Show();
+            Close();
+        }
+
+        private void DeleteTask_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void EditSubtask_Click(object sender, RoutedEventArgs e)

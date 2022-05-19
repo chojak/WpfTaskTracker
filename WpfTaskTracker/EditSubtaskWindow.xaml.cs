@@ -15,30 +15,23 @@ using System.Windows.Shapes;
 namespace WpfTaskTracker
 {
     /// <summary>
-    /// Logika interakcji dla klasy AddTaskWindow.xaml
+    /// Logika interakcji dla klasy EditSubtaskWindow.xaml
     /// </summary>
-    public partial class AddTaskWindow : Window
+    public partial class EditSubtaskWindow : Window
     {
-        public AddTaskWindow()
+        public EditSubtaskWindow()
         {
             InitializeComponent();
         }
 
-        private void AddSubTask_Click(object sender, RoutedEventArgs e)
-        {
-            AddSubTaskWindow win = new AddSubTaskWindow();
-            win.Show();
-        }
-
-        private void SaveTask_Click(object sender, RoutedEventArgs e)
+        private void SaveSubtask_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void EditSubtask_Click(object sender, RoutedEventArgs e)
+        private void DeleteSubtask_Click(object sender, RoutedEventArgs e)
         {
-            EditSubtaskWindow win = new EditSubtaskWindow();
-            win.Show();
+            Close();
         }
     }
 }

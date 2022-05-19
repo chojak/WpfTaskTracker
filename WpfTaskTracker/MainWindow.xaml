@@ -5,12 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTaskTracker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Task tracker" Height="450" Width="800" ScrollViewer.VerticalScrollBarVisibility="Visible">
    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -18,129 +16,233 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label>TaskTracker</Label>
-
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-            <StackPanel Orientation="Horizontal">
-                <Label>Category:</Label>
-                <ComboBox x:Name="CategoryComboBox" Grid.Column="0" Height="Auto" Width="100">
-                    <ComboBoxItem IsSelected="True">All</ComboBoxItem>
-                    <ComboBoxItem>Category 1</ComboBoxItem>
-                    <ComboBoxItem>Category 2</ComboBoxItem>
-                    <ComboBoxItem>Category 3</ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
+            <Label Margin="5">Category:</Label>
+            <ComboBox x:Name="CategoryComboBox" Grid.Column="1" Margin="5">
+                <ComboBoxItem IsSelected="True">All</ComboBoxItem>
+                <ComboBoxItem>Category 1</ComboBoxItem>
+                <ComboBoxItem>Category 2</ComboBoxItem>
+                <ComboBoxItem>Category 3</ComboBoxItem>
+            </ComboBox>
         </Grid>
 
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0">Tasks:</Label>
-
-            <TreeView Margin="10,10,10,13" x:Name="TasksTreeView" Grid.Row="1">
+            <Label Grid.Row="0" Margin="5">Tasks:</Label>
+            <TreeView Margin="10,0,10,5" Padding="5" x:Name="TasksTreeView" Grid.Row="1">
                 <TreeViewItem x:Name="Task1">
                     <TreeViewItem.Header>
-                        <CheckBox>Task1</CheckBox>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                            <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditTask_Click">Task1</Button>
+                        </Grid>
                     </TreeViewItem.Header>
 
                     <TreeViewItem x:Name="Task1Child1">
                         <TreeViewItem.Header>
-                            <CheckBox>SubTask1</CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                                <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask1</Button>
+                            </Grid>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                     <TreeViewItem x:Name="Task1Child2">
                         <TreeViewItem.Header>
-                            <CheckBox>SubTask2</CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                                <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask2</Button>
+                            </Grid>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                     <TreeViewItem x:Name="Task1Child3">
                         <TreeViewItem.Header>
-                            <CheckBox>SubTask3</CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                                <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask3</Button>
+                            </Grid>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                     <TreeViewItem x:Name="Task1Child4">
                         <TreeViewItem.Header>
-                            <CheckBox>SubTask4</CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                                <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask4</Button>
+                            </Grid>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                 </TreeViewItem>
 
                 <TreeViewItem x:Name="Task2">
                     <TreeViewItem.Header>
-                        <CheckBox>Task2</CheckBox>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                            <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditTask_Click">Task2</Button>
+                        </Grid>
                     </TreeViewItem.Header>
 
                     <TreeViewItem Name="Task2Child1">
                         <TreeViewItem.Header>
-                            <CheckBox>SubTask1</CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                                <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask1</Button>
+                            </Grid>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                     <TreeViewItem x:Name="Task2Child2">
                         <TreeViewItem.Header>
-                            <CheckBox>SubTask2</CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                                <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask2</Button>
+                            </Grid>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                     <TreeViewItem x:Name="Task2Child3">
                         <TreeViewItem.Header>
-                            <CheckBox>SubTask3</CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                                <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask3</Button>
+                            </Grid>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                     <TreeViewItem Name="Task2Child4">
                         <TreeViewItem.Header>
-                            <CheckBox>SubTask4</CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                                <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask4</Button>
+                            </Grid>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                 </TreeViewItem>
 
                 <TreeViewItem x:Name="Task3">
                     <TreeViewItem.Header>
-                        <CheckBox>Task3</CheckBox>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                            <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditTask_Click">Task3</Button>
+                        </Grid>
                     </TreeViewItem.Header>
 
                     <TreeViewItem x:Name="Task3Child1">
                         <TreeViewItem.Header>
-                            <CheckBox>SubTask1</CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                                <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask1</Button>
+                            </Grid>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                     <TreeViewItem x:Name="Task3Child2">
                         <TreeViewItem.Header>
-                            <CheckBox>SubTask2</CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                                <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask2</Button>
+                            </Grid>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                     <TreeViewItem x:Name="Task3Child3">
                         <TreeViewItem.Header>
-                            <CheckBox>SubTask3</CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                                <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask3</Button>
+                            </Grid>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                     <TreeViewItem x:Name="Task3Child4">
                         <TreeViewItem.Header>
-                            <CheckBox>SubTask4</CheckBox>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox VerticalContentAlignment="Center"></CheckBox>
+                                <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask4</Button>
+                            </Grid>
                         </TreeViewItem.Header>
                     </TreeViewItem>
                 </TreeViewItem>
             </TreeView>
         </Grid>
 
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="2">
             <CheckBox Name="DifficultyCheckBox" Margin="10,5,10,5">Use difficulty level</CheckBox>
         </Grid>
 
-        <DockPanel Grid.Row="5" Margin="10,5,10,5" IsEnabled="{Binding ElementName=DifficultyCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}">
-            <TextBlock>Difficulty:</TextBlock>
-            <TextBox Text="{Binding ElementName=DifficultySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0"></TextBox>
-            <Slider x:Name="DifficultySlider" Minimum="1" Maximum="6" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight"></Slider>
-        </DockPanel>
+        <Grid Grid.Row="3" IsEnabled="{Binding ElementName=DifficultyCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="10,5">Difficulty:</TextBlock>
+            <TextBox Grid.Column="1" Margin="5" Width="20" TextAlignment="Center" Text="{Binding ElementName=DifficultySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Slider Grid.Column="2" Margin="5" x:Name="DifficultySlider" Minimum="1" Maximum="6" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" ></Slider>
+        </Grid>
 
-        <Grid Grid.Row="6">
-            <Button x:Name="AddTaskButton" Height="20" Width="100" HorizontalAlignment="Right" Margin="0,5,10,10" Click="AddTask_Click">Add new task</Button>
+        <Grid Grid.Row="4">
+            <Button x:Name="AddTaskButton" HorizontalAlignment="Right" Padding="10,3,10,3" Margin="0,5,10,10" Click="AddTask_Click">Add new task</Button>
         </Grid>
     </Grid>
 </Window>
