@@ -120,9 +120,12 @@ namespace WpfTaskTracker
                 {
                     Name = "Task" + task.TaskId,
                 };
+                cb.IsChecked = task.IsCompleted ? true : false;
+                cb.Checked += TaskCheckBox_Changed;
+                cb.Unchecked += TaskCheckBox_Changed;
 
                 StackPanel sp = new StackPanel() { Orientation = Orientation.Horizontal };
-                sp.Children.Add(new CheckBox() { Name = "Task" + task.TaskId });
+                sp.Children.Add(cb);
                 sp.Children.Add(bt);
                 
                 TreeViewItem TaskItem = new TreeViewItem();
@@ -133,7 +136,7 @@ namespace WpfTaskTracker
                     {
                         bt = new Button()
                         {
-                            Name = "Subtask" + subtask.TaskId,
+                            Name = "Task" + task.TaskId + "Subtask" + subtask.SubtaskId,
                             Content = subtask.Name,
                             Background = Brushes.Transparent,
                             Margin = new Thickness(5, 0, 5, 0),
@@ -141,8 +144,18 @@ namespace WpfTaskTracker
                         };
                         bt.AddHandler(Button.ClickEvent, new RoutedEventHandler(EditSubtask_Click));
 
+                        cb = new CheckBox()
+                        {
+                            Name = "Subtask" + subtask.SubtaskId,
+                        };
+                        // jesli task jest skonczony, ustawia, ze subtask tez jest skonczony
+                        // jesli nie jest skonczony, ustawia to co bylo klikniete i zapisane w bazie
+                        cb.IsChecked = task.IsCompleted ? true : subtask.IsCompleted ? true : false;
+                        cb.Checked += SubtaskCheckBox_Changed;
+                        cb.Unchecked += SubtaskCheckBox_Changed;
+
                         sp = new StackPanel() { Orientation = Orientation.Horizontal };
-                        sp.Children.Add(new CheckBox() { Name = "Subtask" + subtask.TaskId });
+                        sp.Children.Add(cb);
                         sp.Children.Add(bt);
 
                         TreeViewItem SubtaskItem = new TreeViewItem();
@@ -153,6 +166,11 @@ namespace WpfTaskTracker
                 tasksForView.Add(TaskItem);
             }
             TasksTreeView.ItemsSource = tasksForView; 
+        }
+
+        private void Cb_Checked(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public MainWindow()
@@ -188,6 +206,40 @@ namespace WpfTaskTracker
         private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             LoadTasks((string)CategoryComboBox.SelectedValue);
+        }
+
+        private void TaskCheckBox_Changed(object sender, RoutedEventArgs e)
+        {
+            // castuje sender na CheckBox, 'wycina' z nazwy sam index Taska
+            // Task2137 - 2137
+            CheckBox cb = (CheckBox)sender;
+            int taskIndex = int.Parse(cb.Name.Substring(4));
+            bool isCompleted = (bool)cb.IsChecked;
+
+            Task task = DbContext.Tasks.Where(t => t.TaskId == taskIndex).FirstOrDefault();
+            task.IsCompleted = isCompleted;
+
+            // znajduje subtaski nalezace do taska i ustawia ich wartosc
+            var subtasks = DbContext.Subtasks.Where(st => st.TaskId == taskIndex).ToList();
+            foreach (Subtask subtask in subtasks)
+            {
+                subtask.IsCompleted = isCompleted;
+            }
+
+            DbContext.SaveChanges();
+            LoadTasks();
+        }
+
+        private void SubtaskCheckBox_Changed(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+            int subtaskIndex = int.Parse(cb.Name.Substring(7));
+            bool isCompleted = (bool)cb.IsChecked;
+
+            Subtask subtask = DbContext.Subtasks.Where(sb => sb.SubtaskId == subtaskIndex).FirstOrDefault();
+            subtask.IsCompleted = isCompleted;
+
+            DbContext.SaveChanges();
         }
     }
 }
