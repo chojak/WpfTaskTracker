@@ -23,6 +23,65 @@ namespace WpfTaskTracker
     {
         public TaskTrackerDbContext DbContext;
 
+        private void FillDatabase()
+        {
+            if (DbContext.Tasks.Count() == 0)
+            {
+                DbContext.Tasks.Add(new Task() 
+                { 
+                    CategoryId = 1, 
+                    Name = "Sprzatanie domu", 
+                    Urgency = 3, 
+                    StartDate = DateTime.Now, 
+                    EndDate = new DateTime(2137, 4, 20),
+                    Subtasks = new List<Subtask> { 
+                        new Subtask() { Name = "Wstac od komputera" },
+                        new Subtask() { Name = "Zebrac smieci" },
+                        new Subtask() { Name = "Wyrzucic smieci" },
+                        new Subtask() { Name = "Wrocic do komputera" },
+                    }
+                });
+
+                DbContext.Tasks.Add(new Task()
+                {
+                    CategoryId = 2,
+                    Name = "Zaliczenie sesji",
+                    Urgency = 0,
+                    StartDate = DateTime.Now,
+                    EndDate = new DateTime(2137, 4, 20),
+                    Subtasks = new List<Subtask> {
+                        new Subtask() { Name = "Pojsc na uczelnie" },
+                        new Subtask() { Name = "Usiasc przy komputerze" },
+                        new Subtask() { Name = "Stackoverflow" },
+                        new Subtask() { Name = "Wstac od komputera" },
+                        new Subtask() { Name = "Pojsc na modlitwe" },
+                    }
+                });
+
+                DbContext.Tasks.Add(new Task()
+                {
+                    CategoryId = 3,
+                    Name = "Zajecia BSK",
+                    Urgency = 7,
+                    StartDate = DateTime.Now,
+                    EndDate = new DateTime(2137, 4, 20),
+                    Subtasks = new List<Subtask> {
+                        new Subtask() { Name = "Wyjsc z uczelni" },
+                        new Subtask() { Name = "Zabka" },
+                        new Subtask() { Name = "Las" },
+                        new Subtask() { Name = "BSK" },
+                    }
+                });
+            }
+            if (DbContext.Categories.Count() == 0)
+            {
+                DbContext.Categories.Add(new Category() { Name = "Kategoria 1" });
+                DbContext.Categories.Add(new Category() { Name = "Kategoria 2" });
+                DbContext.Categories.Add(new Category() { Name = "Kategoria 3" });
+            }
+            DbContext.SaveChanges();
+        }
+        
         private void LoadCategories()
         {
             List<string> categories = new List<string>();
@@ -49,7 +108,7 @@ namespace WpfTaskTracker
             {
                 Button bt = new Button()
                 {
-                    Name = task.Name + task.TaskId,
+                    Name = "Task" + task.TaskId,
                     Content = task.Name,
                     Background = Brushes.Transparent,
                     Margin = new Thickness(5, 0, 5, 0),
@@ -57,8 +116,13 @@ namespace WpfTaskTracker
                 };
                 bt.AddHandler(Button.ClickEvent, new RoutedEventHandler(EditTask_Click));
 
+                CheckBox cb = new CheckBox()
+                {
+                    Name = "Task" + task.TaskId,
+                };
+
                 StackPanel sp = new StackPanel() { Orientation = Orientation.Horizontal };
-                sp.Children.Add(new CheckBox() { Name = task.Name + task.TaskId });
+                sp.Children.Add(new CheckBox() { Name = "Task" + task.TaskId });
                 sp.Children.Add(bt);
                 
                 TreeViewItem TaskItem = new TreeViewItem();
@@ -69,7 +133,7 @@ namespace WpfTaskTracker
                     {
                         bt = new Button()
                         {
-                            Name = subtask.Name + subtask.TaskId,
+                            Name = "Subtask" + subtask.TaskId,
                             Content = subtask.Name,
                             Background = Brushes.Transparent,
                             Margin = new Thickness(5, 0, 5, 0),
@@ -78,7 +142,7 @@ namespace WpfTaskTracker
                         bt.AddHandler(Button.ClickEvent, new RoutedEventHandler(EditSubtask_Click));
 
                         sp = new StackPanel() { Orientation = Orientation.Horizontal };
-                        sp.Children.Add(new CheckBox() { Name = subtask.Name + subtask.TaskId });
+                        sp.Children.Add(new CheckBox() { Name = "Subtask" + subtask.TaskId });
                         sp.Children.Add(bt);
 
                         TreeViewItem SubtaskItem = new TreeViewItem();
@@ -96,7 +160,8 @@ namespace WpfTaskTracker
             InitializeComponent();
 
             DbContext = new TaskTrackerDbContext();
-            
+
+            FillDatabase();
             LoadCategories();
             LoadTasks();
         }

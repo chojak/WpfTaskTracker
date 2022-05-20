@@ -23,6 +23,8 @@ namespace WpfTaskTracker
         public DateTime? StartDate { get; set; }
         
         public DateTime? EndDate { get; set; }
+        
+        public bool IsCompleted { get; set; }
 
         public ICollection<Subtask> Subtasks { get; set; }
     }
