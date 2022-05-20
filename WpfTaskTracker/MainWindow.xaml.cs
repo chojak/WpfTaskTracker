@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfTaskTracker.Model;
 
 namespace WpfTaskTracker
 {
@@ -23,6 +24,14 @@ namespace WpfTaskTracker
         public MainWindow()
         {
             InitializeComponent();
+
+            using (var ctx = new TaskTrackerDbContext())
+            {
+                var stud = new Task() { Name = "Bill" };
+
+                ctx.Tasks.Add(stud);
+                ctx.SaveChanges();
+            }
         }
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
