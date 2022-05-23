@@ -98,6 +98,7 @@ namespace WpfTaskTracker
         {
             List<Task> tasks = new List<Task>();
             List<TreeViewItem> tasksForView = new List<TreeViewItem>();
+            Style taskStyle = (Style)Application.Current.Resources["TaskButton"];
 
             if (category == "All")
                 tasks = DbContext.Tasks.Include("Subtasks").ToList();
@@ -110,9 +111,8 @@ namespace WpfTaskTracker
                 {
                     Name = "Task" + task.TaskId,
                     Content = task.Name,
-                    Background = Brushes.Transparent,
-                    Margin = new Thickness(5, 0, 5, 0),
-                    BorderThickness = new Thickness(0),
+                    Style = taskStyle
+                    
                 };
                 bt.AddHandler(Button.ClickEvent, new RoutedEventHandler(EditTask_Click));
 
@@ -138,9 +138,7 @@ namespace WpfTaskTracker
                         {
                             Name = "Task" + task.TaskId + "Subtask" + subtask.SubtaskId,
                             Content = subtask.Name,
-                            Background = Brushes.Transparent,
-                            Margin = new Thickness(5, 0, 5, 0),
-                            BorderThickness = new Thickness(0),
+                            Style = taskStyle,
                         };
                         bt.AddHandler(Button.ClickEvent, new RoutedEventHandler(EditSubtask_Click));
 

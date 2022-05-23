@@ -5,54 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTaskTracker"
         mc:Ignorable="d"
-        Title="Task tracker" Height="450" Width="800" ScrollViewer.VerticalScrollBarVisibility="Visible">
-   
-    <Grid>
+        Title="Task tracker" Height="450" Width="800">
+    <Grid Style="{StaticResource OutsideGrid}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Margin="5">Category:</Label>
-            <ComboBox x:Name="CategoryComboBox" Grid.Column="1" Margin="5" SelectionChanged="CategoryComboBox_SelectionChanged">
-            </ComboBox>
-        </Grid>
-
-        <Grid Grid.Row="1">
+        <Grid Style="{StaticResource InsideGrid}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Margin="5">Tasks:</Label>
-            <TreeView Margin="10,0,10,5" Padding="5" x:Name="TasksTreeView" Grid.Row="1"/>
-        </Grid>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label>Category:</Label>
+                <ComboBox x:Name="CategoryComboBox" Grid.Column="1" SelectionChanged="CategoryComboBox_SelectionChanged">
+                </ComboBox>
+            </Grid>
 
-        <Grid Grid.Row="2">
-            <CheckBox Name="DifficultyCheckBox" Margin="10,5,10,5">Use difficulty level</CheckBox>
-        </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-        <Grid Grid.Row="3" IsEnabled="{Binding ElementName=DifficultyCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Margin="10,5">Difficulty:</TextBlock>
-            <TextBox Grid.Column="1" Margin="5" Width="20" TextAlignment="Center" Text="{Binding ElementName=DifficultySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <Slider Grid.Column="2" Margin="5" x:Name="DifficultySlider" Minimum="1" Maximum="6" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" ></Slider>
-        </Grid>
+                <Label Grid.Row="0">Tasks:</Label>
+                <TreeView x:Name="TasksTreeView" Grid.Row="1"/>
+            </Grid>
 
-        <Grid Grid.Row="4">
-            <Button x:Name="AddTaskButton" HorizontalAlignment="Right" Padding="10,3,10,3" Margin="0,5,10,10" Click="AddTask_Click">Add new task</Button>
+            <Grid Grid.Row="2">
+                <CheckBox Name="DifficultyCheckBox">Use difficulty level</CheckBox>
+            </Grid>
+
+            <Grid Grid.Row="3" IsEnabled="{Binding ElementName=DifficultyCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label>Difficulty:</Label>
+                <TextBox Grid.Column="1" Style="{StaticResource DifficultyValue}"  Text="{Binding ElementName=DifficultySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Slider Grid.Column="2" x:Name="DifficultySlider"></Slider>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Button x:Name="AddTaskButton" HorizontalAlignment="Right" Click="AddTask_Click">Add new task</Button>
         </Grid>
     </Grid>
 </Window>
