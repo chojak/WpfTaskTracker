@@ -6,99 +6,104 @@
         xmlns:local="clr-namespace:WpfTaskTracker"
         mc:Ignorable="d"
         Title="Edit task" Height="450" Width="800">
-    <Grid>
+    <Grid Style="{StaticResource OutsideGrid}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Margin="5">Name</Label>
-            <TextBox Grid.Column="1" Name="TaskNameInput" Margin="5"></TextBox>
-        </Grid>
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Style="{StaticResource InsideGrid}">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Label Margin="5">Category:</Label>
-            <ComboBox x:Name="CategoryComboBox" Grid.Column="1" Margin="5">
-                <ComboBoxItem IsSelected="True">All</ComboBoxItem>
-                <ComboBoxItem>Category 1</ComboBoxItem>
-                <ComboBoxItem>Category 2</ComboBoxItem>
-                <ComboBoxItem>Category 3</ComboBoxItem>
-            </ComboBox>
-            <CheckBox Grid.Row="1" Grid.Column="1" Name="NewCategoryCheckBox" Margin="5">Add new category</CheckBox>
-            <TextBox Grid.Row="2" Grid.Column="1" Name="NewCategoryNameTextBox" Margin="5"
-                     IsEnabled="{Binding ElementName=NewCategoryCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}">
-            </TextBox>
-        </Grid>
-
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Margin="10,5">Difficulty:</TextBlock>
-            <TextBox Grid.Column="1" Margin="5" Width="20" TextAlignment="Center" Text="{Binding ElementName=DifficultySliderNewTask, Path=Value, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <Slider Grid.Column="2" Margin="5" x:Name="DifficultySliderNewTask" Minimum="1" Maximum="6" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" ></Slider>
-        </Grid>
-
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <CheckBox Margin="10,5,10,5" VerticalAlignment="Center" Name="StartDateCheckBox">Set start date</CheckBox>
-            <DatePicker Grid.Column="1" Margin="5,5,10,5"
-                        IsEnabled="{Binding ElementName=StartDateCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
-        </Grid>
-
-        <Grid Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <CheckBox Margin="10,5,10,5" VerticalAlignment="Center" Name="EndDateCheckBox">Set end date</CheckBox>
-            <DatePicker Grid.Column="1" Margin="5,5,10,5"
-                        IsEnabled="{Binding ElementName=EndDateCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
-        </Grid>
-
-        <Grid Grid.Row="5">
-            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <CheckBox Margin="10,5,10,5" Name="SubTaskCheckBox">Add sub tasks</CheckBox>
-            <Grid Grid.Row="1" IsEnabled="{Binding ElementName=SubTaskCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}">
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0">Name</Label>
+                <TextBox Grid.Column="1" Name="TaskNameInput"></TextBox>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
-                <ListBox Margin="10,0" Grid.Row="0">
-                    <Button Grid.Column="1" Margin="5,0,5,0" Background="Transparent" BorderThickness="0" Click="EditSubtask_Click">Subtask1</Button>
-                </ListBox>
-                <Button HorizontalAlignment="Right" Margin="10,5" Grid.Row="1" Padding="10,3,10,3" Click="AddSubTask_Click">Add new subtask</Button>
+                <Label>Category:</Label>
+                <ComboBox x:Name="CategoryComboBox" Grid.Column="1">
+                    <ComboBoxItem IsSelected="True">All</ComboBoxItem>
+                    <ComboBoxItem>Category 1</ComboBoxItem>
+                    <ComboBoxItem>Category 2</ComboBoxItem>
+                    <ComboBoxItem>Category 3</ComboBoxItem>
+                </ComboBox>
+                <CheckBox Grid.Row="1" Grid.Column="1" Name="NewCategoryCheckBox">Add new category</CheckBox>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="NewCategoryNameTextBox"
+                     IsEnabled="{Binding ElementName=NewCategoryCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}">
+                </TextBox>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label>Difficulty:</Label>
+                <TextBox Grid.Column="1" Text="{Binding ElementName=DifficultySliderNewTask, Path=Value, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Slider Grid.Column="2" x:Name="DifficultySliderNewTask"></Slider>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Name="StartDateCheckBox">Set start date</CheckBox>
+                <DatePicker Grid.Column="1"
+                        IsEnabled="{Binding ElementName=StartDateCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Name="EndDateCheckBox">Set end date</CheckBox>
+                <DatePicker Grid.Column="1" 
+                        IsEnabled="{Binding ElementName=EndDateCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+            </Grid>
+
+            <Grid Grid.Row="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <CheckBox Name="SubTaskCheckBox">Add sub tasks</CheckBox>
+                <Grid Grid.Row="1" IsEnabled="{Binding ElementName=SubTaskCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Grid.Row="0">
+                        <Button Style="{StaticResource TaskButton}" Click="EditSubtask_Click">Subtask1</Button>
+                    </ListBox>
+                    <Button HorizontalAlignment="Right" Grid.Row="1" Click="AddSubTask_Click">Add new subtask</Button>
+                </Grid>
             </Grid>
         </Grid>
-        <Grid HorizontalAlignment="Right" Grid.Row="6">
+        <Grid HorizontalAlignment="Right" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

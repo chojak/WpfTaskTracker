@@ -11,6 +11,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Width" Value="160"/>
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Margin" Value="0,5,10,10"/>
             <Setter Property="Template">
@@ -28,11 +29,20 @@
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 Margin="{TemplateBinding Padding}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                RecognizesAccessKey="True" />   
+                                RecognizesAccessKey="True" />
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="Border" Property="Background" Value="Gainsboro"/>
+                                <!--<Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="300"
+                                                Duration="0:0:5"
+                                                Storyboard.TargetProperty="Width" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>-->
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Gray"/>
@@ -81,6 +91,10 @@
         <Style TargetType="CheckBox">
             <Setter Property="Margin" Value="10,5,10,5"/>
             <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="Margin" Value="5,5,10,5"/>
         </Style>
 
         <Style x:Key="TaskButton" TargetType="Button">

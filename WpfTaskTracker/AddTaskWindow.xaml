@@ -70,7 +70,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox Name="StartDateCheckBox">Set start date</CheckBox>
-                <DatePicker Grid.Column="1" Margin="5,5,10,5"
+                <DatePicker Grid.Column="1"
                         IsEnabled="{Binding ElementName=StartDateCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
             </Grid>
 
@@ -80,7 +80,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox Name="EndDateCheckBox">Set end date</CheckBox>
-                <DatePicker Grid.Column="1" Margin="5,5,10,5"
+                <DatePicker Grid.Column="1"
                         IsEnabled="{Binding ElementName=EndDateCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
             </Grid>
 

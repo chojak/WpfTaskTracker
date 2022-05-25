@@ -6,20 +6,25 @@
         xmlns:local="clr-namespace:WpfTaskTracker"
         mc:Ignorable="d"
         Title="AddSubTaskWindow" Height="150" Width="400">
-    <Grid>
+    <Grid Style="{StaticResource OutsideGrid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid Style="{StaticResource InsideGrid}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Margin="5" VerticalAlignment="Center">Subtask name</Label>
-            <TextBox Grid.Column="1" Name="TaskNameInput" Margin="5" Height="30"></TextBox>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" VerticalAlignment="Center">Subtask name</Label>
+                <TextBox Grid.Column="1" Name="TaskNameInput" Height="30"></TextBox>
+            </Grid>
         </Grid>
-        <Button Grid.Row="6" HorizontalAlignment="Right" Margin="10" Padding="10,3,10,3" Click="SaveSubTask_Click">Save subtask</Button>
+        <Button Grid.Row="1" HorizontalAlignment="Right"  Click="SaveSubTask_Click">Save subtask</Button>
     </Grid>
 </Window>
