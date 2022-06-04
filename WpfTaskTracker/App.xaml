@@ -137,6 +137,12 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
 
+        <Style x:Key="SearchBar" TargetType="TextBox">
+            <Setter Property="Control.FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
         <Style x:Key="InsideGrid" TargetType="Grid">
             <Setter Property="Control.Background" Value="Gainsboro"/>
             <Setter Property="Control.Margin" Value="10"/>

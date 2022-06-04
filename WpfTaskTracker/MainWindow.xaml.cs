@@ -60,6 +60,22 @@ namespace WpfTaskTracker
 
                 DbContext.Tasks.Add(new Task()
                 {
+                    CategoryId = 2,
+                    Name = "Niezdanie sesji",
+                    Urgency = 0,
+                    StartDate = DateTime.Now,
+                    EndDate = new DateTime(2137, 4, 20),
+                    Subtasks = new List<Subtask> {
+                        new Subtask() { Name = "Pojsc na uczelnie" },
+                        new Subtask() { Name = "Usiasc przy komputerze" },
+                        new Subtask() { Name = "Stackoverflow" },
+                        new Subtask() { Name = "Wstac od komputera" },
+                        new Subtask() { Name = "Pojscie pobiegac" },
+                    }
+                });
+
+                DbContext.Tasks.Add(new Task()
+                {
                     CategoryId = 3,
                     Name = "Zajecia BSK",
                     Urgency = 7,
@@ -94,7 +110,7 @@ namespace WpfTaskTracker
             CategoryComboBox.SelectedIndex = 0;
         }
 
-        private void LoadTasks(string category = "All")
+        private void LoadTasks(string category = "All", string keyWord = "", int urgency = -1)
         {
             List<Task> tasks = new List<Task>();
             List<TreeViewItem> tasksForView = new List<TreeViewItem>();
@@ -104,6 +120,17 @@ namespace WpfTaskTracker
                 tasks = DbContext.Tasks.Include("Subtasks").ToList();
             else 
                 tasks = DbContext.Tasks.Include("Subtasks").Where(t => t.Category.Name == category).ToList();
+
+            if (keyWord != "")
+            {
+                keyWord = keyWord.ToLower();
+                tasks = tasks.Where(t => t.Name.ToLower().Contains(keyWord) || t.Subtasks.Any(s => s.Name.ToLower().Contains(keyWord))).ToList();
+            }
+
+            if ((bool)DifficultyCheckBox.IsChecked)
+            {
+                tasks = tasks.Where(t => t.Urgency == urgency).ToList();
+            }
 
             foreach (var task in tasks)
             {
@@ -177,6 +204,8 @@ namespace WpfTaskTracker
 
             DbContext = new TaskTrackerDbContext();
 
+            DifficultySlider.ValueChanged += DifficultySlider_ValueChanged;
+
             FillDatabase();
             LoadCategories();
             LoadTasks();
@@ -203,7 +232,7 @@ namespace WpfTaskTracker
 
         private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LoadTasks((string)CategoryComboBox.SelectedValue);
+            LoadTasks((string)CategoryComboBox.SelectedValue, SearchBoxTextBox.Text, (int)DifficultySlider.Value);
         }
 
         private void TaskCheckBox_Changed(object sender, RoutedEventArgs e)
@@ -225,7 +254,7 @@ namespace WpfTaskTracker
             }
 
             DbContext.SaveChanges();
-            LoadTasks();
+            LoadTasks((string)CategoryComboBox.SelectedValue, SearchBoxTextBox.Text, (int)DifficultySlider.Value);
         }
 
         private void SubtaskCheckBox_Changed(object sender, RoutedEventArgs e)
@@ -238,6 +267,21 @@ namespace WpfTaskTracker
             subtask.IsCompleted = isCompleted;
 
             DbContext.SaveChanges();
+        }
+
+        private void SearchBoxTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LoadTasks((string)CategoryComboBox.SelectedValue, SearchBoxTextBox.Text, (int)DifficultySlider.Value);
+        }
+
+        private void DifficultySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            LoadTasks((string)CategoryComboBox.SelectedValue, SearchBoxTextBox.Text, (int)DifficultySlider.Value);
+        }
+
+        private void DifficultyCheckBox_Changed(object sender, RoutedEventArgs e)
+        {
+            LoadTasks((string)CategoryComboBox.SelectedValue, SearchBoxTextBox.Text, (int)DifficultySlider.Value);
         }
     }
 }
