@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTaskTracker"
         mc:Ignorable="d"
-        Title="Task tracker" Height="450" Width="800">
+        Title="Task tracker" Height="800" Width="800">
     <Grid Style="{StaticResource OutsideGrid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -62,6 +62,7 @@
         </Grid>
         <Grid Grid.Row="1">
             <Button x:Name="AddTaskButton" HorizontalAlignment="Right" Click="AddTask_Click">Add new task</Button>
+            <Button x:Name="AddTaskButtonchuj" HorizontalAlignment="Right" Click="AddTask_Click">Add new task</Button>
         </Grid>
     </Grid>
 </Window>

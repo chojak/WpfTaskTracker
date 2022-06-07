@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -163,7 +164,7 @@ namespace WpfTaskTracker
                     {
                         bt = new Button()
                         {
-                            Name = "Task" + task.TaskId + "Subtask" + subtask.SubtaskId,
+                            Name = "Task_" + task.TaskId + "_Subtask_" + subtask.SubtaskId,
                             Content = subtask.Name,
                             Style = taskStyle,
                         };
@@ -216,7 +217,7 @@ namespace WpfTaskTracker
             AddTaskWindow win2 = new AddTaskWindow();
             if (win2.ShowDialog() == true)
             {
-                LoadTasks();
+                LoadTasks((string)CategoryComboBox.SelectedValue, SearchBoxTextBox.Text, (int)DifficultySlider.Value);
                 LoadCategories();
             }
         }
@@ -224,13 +225,71 @@ namespace WpfTaskTracker
         private void EditTask_Click(object sender, RoutedEventArgs e)
         {
             EditTaskWindow win = new EditTaskWindow();
-            win.Show();
+            Button taskButton = (Button)sender;
+            int taskId = int.Parse(taskButton.Name.Substring(4));
+
+            Task task = DbContext.Tasks.Include("Subtasks").Where(t => t.TaskId == taskId).FirstOrDefault();
+            List<Category> categories = DbContext.Categories.ToList();
+            List<Subtask> subtasks = task.Subtasks.ToList();
+
+            win.Task = task;
+            win.Categories = categories;
+            win.Subtasks = subtasks;
+            win.DbContext = DbContext;
+
+            if (win.ShowDialog() == true)
+            {
+
+            }
+
+            if (win.Delete == true)
+            {
+                DbContext.Tasks.Remove(task);
+            }
+
+            if (win.Delete == false)
+            {
+                DbContext.Entry(task).CurrentValues.SetValues(win.Task);
+                task = win.Task;
+            }
+
+            DbContext.SaveChanges();
+            
+            LoadTasks((string)CategoryComboBox.SelectedValue, SearchBoxTextBox.Text, (int)DifficultySlider.Value);
+            LoadCategories();
         }
 
         private void EditSubtask_Click(object sender, RoutedEventArgs e)
         {
             EditSubtaskWindow win = new EditSubtaskWindow();
-            win.Show();
+            Button subtaskButton = (Button)sender;
+
+            int taskId = int.Parse(subtaskButton.Name.Split("_")[1]);
+            int subtaskId = int.Parse(subtaskButton.Name.Split("_")[3]);
+
+            Task currTask = DbContext.Tasks.Include("Subtasks").Where(t => t.TaskId == taskId).FirstOrDefault();
+            Subtask currSubtask = currTask.Subtasks.Where(s => s.SubtaskId == subtaskId).FirstOrDefault();
+
+            //currTask.Subtasks.ToList().RemoveAt(0);
+
+            //foreach (var subtask in currTask.Subtasks)
+            //{
+            //    System.Diagnostics.Debug.WriteLine(subtask.Name);
+            //}
+
+            win.Subtask = currSubtask;
+            win.Subtasks = currTask.Subtasks.ToList();
+
+            if (win.ShowDialog() == true)
+            {
+
+            }
+
+            if (win.Delete)
+                DbContext.Subtasks.Remove(currSubtask);
+
+            DbContext.SaveChanges();
+            LoadTasks((string)CategoryComboBox.SelectedValue, SearchBoxTextBox.Text, (int)DifficultySlider.Value);
         }
 
         private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

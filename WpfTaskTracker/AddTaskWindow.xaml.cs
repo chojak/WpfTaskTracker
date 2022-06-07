@@ -153,8 +153,6 @@ namespace WpfTaskTracker
         {
             EditSubtaskWindow win = new EditSubtaskWindow();
             Button subtaskButton = (Button)sender;
-            System.Diagnostics.Debug.WriteLine(subtaskButton.Content.ToString());
-            System.Diagnostics.Debug.WriteLine(subtaskButton.Content);
 
             win.Subtask = Subtasks.Where(s => s.Name == subtaskButton.Content.ToString()).FirstOrDefault();
             win.Subtasks = Subtasks;

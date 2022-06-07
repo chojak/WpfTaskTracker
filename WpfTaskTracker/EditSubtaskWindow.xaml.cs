@@ -21,6 +21,7 @@ namespace WpfTaskTracker
     {
         public Subtask Subtask { get; set; }
         public List<Subtask> Subtasks { get; set; }
+        public bool Delete { get; set; }
 
         public EditSubtaskWindow()
         {
@@ -48,6 +49,7 @@ namespace WpfTaskTracker
         private void DeleteSubtask_Click(object sender, RoutedEventArgs e)
         {
             Subtasks.Remove(Subtask);
+            Delete = true;
             DialogResult = true;
             Close();
         }

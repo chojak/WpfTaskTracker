@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTaskTracker"
         mc:Ignorable="d"
-        Title="Edit task" Height="450" Width="800">
+        Title="Edit task" Height="450" Width="800"
+        Loaded="WindowLoaded">
     <Grid Style="{StaticResource OutsideGrid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -42,10 +43,6 @@
                 </Grid.RowDefinitions>
                 <Label>Category:</Label>
                 <ComboBox x:Name="CategoryComboBox" Grid.Column="1">
-                    <ComboBoxItem IsSelected="True">All</ComboBoxItem>
-                    <ComboBoxItem>Category 1</ComboBoxItem>
-                    <ComboBoxItem>Category 2</ComboBoxItem>
-                    <ComboBoxItem>Category 3</ComboBoxItem>
                 </ComboBox>
                 <CheckBox Grid.Row="1" Grid.Column="1" Name="NewCategoryCheckBox">Add new category</CheckBox>
                 <TextBox Grid.Row="2" Grid.Column="1" Name="NewCategoryNameTextBox"
@@ -70,7 +67,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox Name="StartDateCheckBox">Set start date</CheckBox>
-                <DatePicker Grid.Column="1"
+                <DatePicker x:Name="StartDateDatePicker" Grid.Column="1"
                         IsEnabled="{Binding ElementName=StartDateCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
             </Grid>
 
@@ -80,7 +77,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox Name="EndDateCheckBox">Set end date</CheckBox>
-                <DatePicker Grid.Column="1" 
+                <DatePicker x:Name="EndDateDatePicker" Grid.Column="1" 
                         IsEnabled="{Binding ElementName=EndDateCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
             </Grid>
 
@@ -96,8 +93,8 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ListBox Grid.Row="0">
-                        <Button Style="{StaticResource TaskButton}" Click="EditSubtask_Click">Subtask1</Button>
+                    <ListBox x:Name="SubtasksListBox" Grid.Row="0">
+                        <!--<Button Style="{StaticResource TaskButton}" Click="EditSubtask_Click">Subtask1</Button>-->
                     </ListBox>
                     <Button HorizontalAlignment="Right" Grid.Row="1" Click="AddSubTask_Click">Add new subtask</Button>
                 </Grid>
