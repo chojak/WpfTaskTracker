@@ -214,8 +214,11 @@ namespace WpfTaskTracker
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
             AddTaskWindow win2 = new AddTaskWindow();
-            win2.Show();
-
+            if (win2.ShowDialog() == true)
+            {
+                LoadTasks();
+                LoadCategories();
+            }
         }
 
         private void EditTask_Click(object sender, RoutedEventArgs e)

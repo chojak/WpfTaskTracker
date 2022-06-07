@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTaskTracker"
         mc:Ignorable="d"
-        Title="Edit subtask" Height="150" Width="400">
+        Title="Edit subtask" Height="150" Width="400"
+        Loaded="WindowLoaded">
     <Grid Style="{StaticResource OutsideGrid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

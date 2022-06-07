@@ -19,6 +19,7 @@ namespace WpfTaskTracker
     /// </summary>
     public partial class AddSubTaskWindow : Window
     {
+        public Subtask subtask { get; set; }
         public AddSubTaskWindow()
         {
             InitializeComponent();
@@ -26,6 +27,13 @@ namespace WpfTaskTracker
 
         private void SaveSubTask_Click(object sender, RoutedEventArgs e)
         {
+            if (TaskNameInput.Text.Length < 4)
+            {
+                MessageBox.Show("Subtask name must contain at least 4 characters");
+                return;
+            }
+            subtask.Name = TaskNameInput.Text;
+            DialogResult = true;
             Close();
         }
     }

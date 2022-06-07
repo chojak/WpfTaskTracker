@@ -19,18 +19,36 @@ namespace WpfTaskTracker
     /// </summary>
     public partial class EditSubtaskWindow : Window
     {
+        public Subtask Subtask { get; set; }
+        public List<Subtask> Subtasks { get; set; }
+
         public EditSubtaskWindow()
         {
             InitializeComponent();
         }
 
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            TaskNameInput.Text = Subtask == null ? "empty name (error)" : Subtask.Name;
+        }
+
         private void SaveSubtask_Click(object sender, RoutedEventArgs e)
         {
+            if (TaskNameInput.Text.Length < 4)
+            {
+                MessageBox.Show("Subtask name must contain at least 4 characters");
+                return;
+            }
+
+            Subtasks[Subtasks.IndexOf(Subtask)].Name = TaskNameInput.Text;
+            DialogResult = true;
             Close();
         }
 
         private void DeleteSubtask_Click(object sender, RoutedEventArgs e)
         {
+            Subtasks.Remove(Subtask);
+            DialogResult = true;
             Close();
         }
     }

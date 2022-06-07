@@ -33,23 +33,20 @@
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="56*"/>
+                    <ColumnDefinition Width="649*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Label>Category:</Label>
-                <ComboBox x:Name="CategoryComboBox" Grid.Column="1" Margin="5">
-                    <ComboBoxItem IsSelected="True">All</ComboBoxItem>
-                    <ComboBoxItem>Category 1</ComboBoxItem>
-                    <ComboBoxItem>Category 2</ComboBoxItem>
-                    <ComboBoxItem>Category 3</ComboBoxItem>
+                <Label Margin="5,5,5,5">Category:</Label>
+                <ComboBox x:Name="CategoryComboBox" Grid.Column="1" Margin="5,5,5,5" Grid.ColumnSpan="2">
                 </ComboBox>
-                <CheckBox Grid.Row="1" Grid.Column="1" Name="NewCategoryCheckBox">Add new category</CheckBox>
+                <CheckBox Grid.Row="1" Grid.Column="1" Name="NewCategoryCheckBox" Grid.ColumnSpan="2" Margin="10,5,10,5">Add new category</CheckBox>
                 <TextBox Grid.Row="2" Grid.Column="1" Name="NewCategoryNameTextBox"
-                     IsEnabled="{Binding ElementName=NewCategoryCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}">
+                     IsEnabled="{Binding ElementName=NewCategoryCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" Margin="5,5,5,5">
                 </TextBox>
             </Grid>
 
@@ -70,7 +67,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox Name="StartDateCheckBox">Set start date</CheckBox>
-                <DatePicker Grid.Column="1"
+                <DatePicker x:Name="StartDateDatePicker" Grid.Column="1"
                         IsEnabled="{Binding ElementName=StartDateCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
             </Grid>
 
@@ -80,7 +77,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox Name="EndDateCheckBox">Set end date</CheckBox>
-                <DatePicker Grid.Column="1"
+                <DatePicker x:Name="EndDateDatePicker" Grid.Column="1"
                         IsEnabled="{Binding ElementName=EndDateCheckBox, Path=IsChecked, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
             </Grid>
 
@@ -96,8 +93,10 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ListBox Grid.Row="0">
-                        <Button Style="{StaticResource TaskButton}" Grid.Column="1" Click="EditSubtask_Click">Subtask1</Button>
+                    <ListBox x:Name="SubtasksListBox" Grid.Row="0">
+                        <!--<Button Style="{StaticResource TaskButton}" Grid.Column="1" Click="EditSubtask_Click">Subtask1</Button>
+                        <Button Style="{StaticResource TaskButton}" Grid.Column="1" Click="EditSubtask_Click">Subtask2</Button>
+                        <Button Style="{StaticResource TaskButton}" Grid.Column="1" Click="EditSubtask_Click">Subtask3</Button>-->
                     </ListBox>
                     <Button HorizontalAlignment="Right" Grid.Row="1" Click="AddSubTask_Click">Add new subtask</Button>
                 </Grid>
