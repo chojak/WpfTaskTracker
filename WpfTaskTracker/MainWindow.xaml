@@ -61,8 +61,8 @@
             </DockPanel>
         </Grid>
         <Grid Grid.Row="1">
+            <Button x:Name="PrintButton" HorizontalAlignment="Left" Margin="10,10"  Click="PrintButton_Click">Print</Button>
             <Button x:Name="AddTaskButton" HorizontalAlignment="Right" Click="AddTask_Click">Add new task</Button>
-            <Button x:Name="AddTaskButtonchuj" HorizontalAlignment="Right" Click="AddTask_Click">Add new task</Button>
         </Grid>
     </Grid>
 </Window>

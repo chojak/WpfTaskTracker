@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfTaskTracker.Model;
 
+
 namespace WpfTaskTracker
 {
     /// <summary>
@@ -344,6 +345,18 @@ namespace WpfTaskTracker
         private void DifficultyCheckBox_Changed(object sender, RoutedEventArgs e)
         {
             LoadTasks((string)CategoryComboBox.SelectedValue, SearchBoxTextBox.Text, (int)DifficultySlider.Value);
+        }
+
+        private void PrintButton_Click(object sender, RoutedEventArgs e)
+        {
+           
+                //this.IsEnabled = false;
+                PrintDialog printDialog = new PrintDialog();
+                if(printDialog.ShowDialog() == true)
+                {
+                    printDialog.PrintVisual(TasksTreeView, "Print");
+                }
+           
         }
     }
 }
